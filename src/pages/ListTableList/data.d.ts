@@ -1,16 +1,11 @@
 export interface TableListItem {
-  key: number;
-  disabled?: boolean;
-  href: string;
-  avatar: string;
-  name: string;
-  owner: string;
-  desc: string;
-  callNo: number;
+  id: number;
   status: number;
-  updatedAt: Date;
-  createdAt: Date;
-  progress: number;
+  network: string;
+  listen_address: string;
+  listen_port: number;
+  target_address: string;
+  target_port: number;
 }
 
 export interface TableListPagination {
@@ -25,10 +20,13 @@ export interface TableListData {
 }
 
 export interface TableListParams {
-  status?: string;
-  name?: string;
-  desc?: string;
-  key?: number;
+  id?: number;
+  status?: number;
+  network?: string;
+  listen_address?: string;
+  listen_port?: number;
+  target_address?: string;
+  target_port?: number;
   pageSize?: number;
   currentPage?: number;
   filter?: { [key: string]: any[] };

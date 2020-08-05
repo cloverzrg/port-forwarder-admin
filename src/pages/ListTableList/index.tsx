@@ -35,9 +35,13 @@ const handleUpdate = async (fields: FormValueType) => {
   const hide = message.loading('正在配置');
   try {
     await updateRule({
-      name: fields.name,
-      desc: fields.desc,
-      key: fields.key,
+      id: fields.id,
+      status: fields.status,
+      network: fields.network,
+      listen_address: fields.listen_address,
+      listen_port: fields.listen_port,
+      target_address: fields.target_address,
+      target_port: fields.target_port,
     });
     hide();
 
@@ -59,7 +63,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
   if (!selectedRows) return true;
   try {
     await removeRule({
-      key: selectedRows.map((row) => row.key),
+      key: selectedRows.map((row) => row.id),
     });
     hide();
     message.success('删除成功，即将刷新');
@@ -79,26 +83,14 @@ const TableList: React.FC<{}> = () => {
   const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: '规则名称',
-      dataIndex: 'name',
+      title: 'Id',
+      dataIndex: 'id',
       rules: [
         {
           required: true,
           message: '规则名称为必填项',
         },
       ],
-    },
-    {
-      title: '描述',
-      dataIndex: 'desc',
-      valueType: 'textarea',
-    },
-    {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
-      sorter: true,
-      hideInForm: true,
-      renderText: (val: string) => `${val} 万`,
     },
     {
       title: '状态',
@@ -112,22 +104,32 @@ const TableList: React.FC<{}> = () => {
       },
     },
     {
-      title: '上次调度时间',
-      dataIndex: 'updatedAt',
-      sorter: true,
-      valueType: 'dateTime',
-      hideInForm: true,
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
-        if (`${status}` === '0') {
-          return false;
-        }
-        if (`${status}` === '3') {
-          return <Input {...rest} placeholder="请输入异常原因！" />;
-        }
-        return defaultRender(item);
-      },
+      title: 'network',
+      dataIndex: 'network',
+      // valueType: 'textarea',
     },
+    {
+      title: 'listen_address',
+      dataIndex: 'listen_address',
+      sorter: true,
+      hideInForm: true,
+    },
+    {
+      title: 'listen_port',
+      dataIndex: 'listen_port',
+      // valueType: 'textarea',
+    },
+    {
+      title: 'target_address',
+      dataIndex: 'target_address',
+      // valueType: 'textarea',
+    },
+    {
+      title: 'target_port',
+      dataIndex: 'target_port',
+      // valueType: 'textarea',
+    },
+   
     {
       title: '操作',
       dataIndex: 'option',
@@ -154,7 +156,7 @@ const TableList: React.FC<{}> = () => {
       <ProTable<TableListItem>
         headerTitle="查询表格"
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         toolBarRender={() => [
           <Button type="primary" onClick={() => handleModalVisible(true)}>
             <PlusOutlined /> 新建
@@ -172,7 +174,7 @@ const TableList: React.FC<{}> = () => {
             <div>
               已选择 <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a> 项&nbsp;&nbsp;
               <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)} 万
+                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.id, 0)} 万
               </span>
             </div>
           }
@@ -200,7 +202,7 @@ const TableList: React.FC<{}> = () => {
               }
             }
           }}
-          rowKey="key"
+          rowKey="id"
           type="form"
           columns={columns}
           rowSelection={{}}
