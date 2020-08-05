@@ -77,12 +77,6 @@ export default defineConfig({
               component: './ListTableList',
             },
             {
-              name: '登录页',
-              icon: 'smile',
-              path: '/login',
-              component: './UserLogin',
-            },
-            {
               component: './404',
             },
           ],
