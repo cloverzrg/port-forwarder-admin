@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, message, Input } from 'antd';
+import { Button, Divider, message } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
@@ -165,7 +165,7 @@ const TableList: React.FC<{}> = () => {
       ],
       // valueType: 'textarea',
     },
-   
+
     {
       title: '操作',
       dataIndex: 'option',
