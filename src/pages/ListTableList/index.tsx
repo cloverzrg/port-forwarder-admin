@@ -85,6 +85,7 @@ const TableList: React.FC<{}> = () => {
     {
       title: 'Id',
       dataIndex: 'id',
+      hideInForm: true,
       rules: [
         {
           required: true,
@@ -96,6 +97,7 @@ const TableList: React.FC<{}> = () => {
       title: '状态',
       dataIndex: 'status',
       hideInForm: true,
+      sorter: true,
       valueEnum: {
         0: { text: '关闭', status: 'Default' },
         1: { text: '运行中', status: 'Processing' },
@@ -106,27 +108,61 @@ const TableList: React.FC<{}> = () => {
     {
       title: 'network',
       dataIndex: 'network',
+      sorter: true,
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
       // valueType: 'textarea',
     },
     {
       title: 'listen_address',
       dataIndex: 'listen_address',
       sorter: true,
-      hideInForm: true,
+      hideInForm: false,
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
     },
     {
       title: 'listen_port',
       dataIndex: 'listen_port',
+      sorter: true,
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
       // valueType: 'textarea',
     },
     {
       title: 'target_address',
       dataIndex: 'target_address',
+      sorter: true,
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
       // valueType: 'textarea',
     },
     {
       title: 'target_port',
       dataIndex: 'target_port',
+      sorter: true,
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
       // valueType: 'textarea',
     },
    
@@ -142,10 +178,35 @@ const TableList: React.FC<{}> = () => {
               setStepFormValues(record);
             }}
           >
-            配置
+            启动
           </a>
           <Divider type="vertical" />
-          <a href="">订阅警报</a>
+          <a
+            onClick={() => {
+              handleUpdateModalVisible(true);
+              setStepFormValues(record);
+            }}
+          >
+            停止
+          </a>
+          <Divider type="vertical" />
+          <a
+            onClick={() => {
+              handleUpdateModalVisible(true);
+              setStepFormValues(record);
+            }}
+          >
+            删除
+          </a>
+          <Divider type="vertical" />
+          <a
+            onClick={() => {
+              handleUpdateModalVisible(true);
+              setStepFormValues(record);
+            }}
+          >
+            配置
+          </a>
         </>
       ),
     },
