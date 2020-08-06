@@ -35,9 +35,11 @@ const formLayout = {
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const [formVals, setFormVals] = useState<FormValueType>({
-    name: props.values.name,
-    desc: props.values.desc,
-    key: props.values.key,
+    id: props.values.id,
+    listen_address: props.values.listen_address,
+    listen_port: props.values.listen_port,
+    target_address: props.values.target_address,
+    target_port: props.values.target_port,
     target: '0',
     template: '0',
     type: '1',
@@ -201,8 +203,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           template: formVals.template,
           type: formVals.type,
           frequency: formVals.frequency,
-          name: formVals.name,
-          desc: formVals.desc,
+          network: formVals.network,
         }}
       >
         {renderContent()}
